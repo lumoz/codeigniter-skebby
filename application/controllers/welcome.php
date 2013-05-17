@@ -1,30 +1,35 @@
-<?php
-
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
 
-   
-    function __construct() {
-        parent::__construct();
-        $this->load->library('skebby');
-    }
+	public function index() {
 
-    public function index() {
-        $this->skebby->set_recipients(array('393291677525'));
-        $this->skebby->set_text('Test SMS');
-        $sms = $this->skebby->send_sms();
-        $credito = $this->skebby->get_credit();
-        var_dump($sms);
-        var_dump($credito);
-    }
+		$this->load->library('skebby');
 
- 
-    
-   
+		$something = $result = TRUE;
 
+		$this->skebby->set_method('send_sms_classic')
+			->set_sender('Me')
+			->set_recipients(array('393*********', '393*********'));
+
+		if ($something === TRUE) {
+			// Add recipient...
+			$this->skebby->set_recipients('393*********');
+		}
+
+		if ($result === FALSE) {
+			$this->skebby->set_text('Sorry man…');
+		} else {
+			$this->skebby->set_text('You win!');
+		}
+
+		$remaining_sms = $this->skebby->send();
+
+		if ($remaining_sms !== FALSE) {
+			echo 'You have '. $remaining_sms .' SMS left, my dear';
+		}
+	}
 }
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+/* End of file skebby.php */
+/* Location: ./application/controllers/skebby.php */
