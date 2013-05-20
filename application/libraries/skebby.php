@@ -5,7 +5,7 @@
  * @author	Luigi Mozzillo <luigi@innato.it>
  * @link	http://innato.it
  * @forked_from	https://github.com/riccamastellone/codeigniter-skebby
- * @version	1.0
+ * @version	1.1
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -181,7 +181,7 @@ class Skebby {
 			 , 'password'	=> $this->_config['password']
 			 , 'charset'	=> $this->_config['charset']
 			 , 'text'		=> $this->_text
-			 , 'recipients[]'	=> implode('&recipients[]=', $this->_recipients)
+			 , 'recipients'	=> $this->_recipients
 		);
 
 		if ( ! is_int($this->_config['sender'])) {
